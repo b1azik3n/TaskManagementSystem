@@ -20,6 +20,7 @@ namespace DomainLayer.Model
         //Navigation Property
         public Client Client { get; set; }
         public ICollection<ProjectMember> ProjectMember { get; set; }
+        public ICollection<TaskModel> Task { get; set; }
 
     }
 
