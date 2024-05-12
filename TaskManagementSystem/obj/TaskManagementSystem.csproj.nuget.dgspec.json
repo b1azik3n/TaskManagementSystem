@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj": {}
+    "D:\\shubu\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj": {}
   },
   "projects": {
-    "E:\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "E:\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\Shubham\\.nuget\\packages\\",
-        "outputPath": "E:\\TaskManagementSystem\\DataAccessLayer\\obj\\",
+        "projectPath": "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Shubham\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
-                "projectPath": "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj"
+              "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
+                "projectPath": "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj"
               }
             }
           }
@@ -75,21 +75,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
+    "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj",
+        "projectUniqueName": "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj",
         "projectName": "DomainLayer",
-        "projectPath": "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj",
-        "packagesPath": "C:\\Users\\Shubham\\.nuget\\packages\\",
-        "outputPath": "E:\\TaskManagementSystem\\DomainLayer\\obj\\",
+        "projectPath": "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "D:\\shubu\\TaskManagementSystem\\DomainLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Shubham\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -136,21 +136,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj": {
+    "D:\\shubu\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj",
+        "projectUniqueName": "D:\\shubu\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj",
         "projectName": "TaskManagementSystem",
-        "projectPath": "E:\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj",
-        "packagesPath": "C:\\Users\\Shubham\\.nuget\\packages\\",
-        "outputPath": "E:\\TaskManagementSystem\\TaskManagementSystem\\obj\\",
+        "projectPath": "D:\\shubu\\TaskManagementSystem\\TaskManagementSystem\\TaskManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "D:\\shubu\\TaskManagementSystem\\TaskManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Shubham\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -158,17 +158,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "E:\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj"
+              "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "D:\\shubu\\TaskManagementSystem\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
-                "projectPath": "E:\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj"
+              "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj": {
+                "projectPath": "D:\\shubu\\TaskManagementSystem\\DomainLayer\\DomainLayer.csproj"
               }
             }
           }
@@ -225,7 +226,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
