@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Data;
+using DataAccessLayer.Repository.General;
 using DomainLayer.Model;
 
 namespace DataAccessLayer.Repository.DailyLogs
 {
-    public class LogRepo : ILogRepo
+    public class LogRepo : Repo,ILogRepo
     {
         private readonly TaskDbContext context;
         private readonly IMapper mapper;
 
-        public LogRepo(TaskDbContext context, IMapper mapper) //mapper
+        public LogRepo(TaskDbContext context, IMapper mapper) : base(context, mapper)
         {
             this.context = context;
             this.mapper = mapper;

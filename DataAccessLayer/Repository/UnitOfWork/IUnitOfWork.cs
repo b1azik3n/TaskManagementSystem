@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer.Repository.AssignMember;
 using DataAccessLayer.Repository.Authentication;
-using DataAccessLayer.Repository.Clients;
 using DataAccessLayer.Repository.DailyLogs;
+using DataAccessLayer.Repository.General;
 using DataAccessLayer.Repository.Projects;
+using DataAccessLayer.Repository.Task;
 
 namespace DataAccessLayer.Repository.UnitOfWork
 {
@@ -17,6 +13,12 @@ namespace DataAccessLayer.Repository.UnitOfWork
         public IAuthRepo AuthRepo { get; set; }
         public IProjectRepo ProjectRepo { get; set; }
         public IRepo Repo { get; set; }
+
+        public IMemberAssignRepo MemberAssignRepo { get; set; }
+        public ITaskRepo TaskRepo { get; set; }
+
+
+
 
 
 

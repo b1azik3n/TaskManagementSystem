@@ -1,13 +1,14 @@
 ﻿using DomainLayer.ViewModels;
+using TaskManagementSystem.Services.GeneralService;
 
 namespace TaskManagementSystem.Services.Projects
 {
-    public interface IProjectService
+    public interface IProjectService:IService
     {
-        void AddNewProject(ProjectVM project);
-        void RemoveProject(ProjectVM project);
-        List<ProjectVM> GetAllProjects();
-        ProjectVM GetProjectByName(string name);
-        void EditProject(ProjectVM project);
+        void AddNew(ProjectAddVM project, Guid id);
+        List<ProjectDisplayVM> GetAllProjects();
+        ProjectDisplayVM GetProjectById(Guid Id);
+        public void EditProject(ProjectAddVM projectVM, Guid Id);
+
     }
 }

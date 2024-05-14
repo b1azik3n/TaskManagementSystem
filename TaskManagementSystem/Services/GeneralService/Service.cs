@@ -33,9 +33,9 @@ namespace TaskManagementSystem.Services.GeneralService
             unit.SaveChanges();
         }
 
-        public List<Tmodel> GetAll<Tmodel>() where Tmodel : BaseClass
+        public List<TViewModel> GetAll<Tmodel,TViewModel>() where Tmodel : BaseClass
         {
-            var list = unit.Repo.GetAll<Tmodel>();
+            var list = unit.Repo.GetAll<Tmodel, TViewModel>();
             return list;
 
         }
@@ -47,10 +47,11 @@ namespace TaskManagementSystem.Services.GeneralService
             return vm;
         }
 
-        public void Remove<Tmodel, TViewModel>(TViewModel tmodel) where Tmodel : BaseClass
+        public bool Remove<Tmodel, TViewModel>(Guid Id) where Tmodel : BaseClass
         {
-            var send = mapper.Map<Tmodel>(tmodel);
-            unit.Repo.Remove(send);
+            return unit.Repo.Remove<Tmodel>(Id);
+         
+
         }
     }
 }

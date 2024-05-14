@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Data;
+using DataAccessLayer.Repository.AssignMember;
 using DataAccessLayer.Repository.Authentication;
-using DataAccessLayer.Repository.Clients;
 using DataAccessLayer.Repository.DailyLogs;
+using DataAccessLayer.Repository.General;
 using DataAccessLayer.Repository.Projects;
+using DataAccessLayer.Repository.Task;
 
 namespace DataAccessLayer.Repository.UnitOfWork
 {
@@ -13,11 +15,13 @@ namespace DataAccessLayer.Repository.UnitOfWork
 
         public UnitOfWork(TaskDbContext context, IMapper mapper)
         {
-            LogRepo = new LogRepo(context, mapper);
+            LogRepo = new LogRepo(context,mapper);
             this.context = context;
             AuthRepo = new AuthRepo(context); 
             ProjectRepo = new ProjectRepo(context,mapper);
             Repo= new Repo(context,mapper);
+            MemberAssignRepo = new MemberAssignRepo(context);
+            TaskRepo=new TaskRepo(context,mapper);
 
         }
 
@@ -25,6 +29,10 @@ namespace DataAccessLayer.Repository.UnitOfWork
         public IAuthRepo AuthRepo { get; set; }
         public IProjectRepo ProjectRepo { get; set; }
         public IRepo Repo { get; set; }
+        public IMemberAssignRepo MemberAssignRepo { get; set; }
+        public ITaskRepo TaskRepo { get; set; }
+        //public TaskRepo TaskRepo { get; }
+
 
         public void SaveChanges()
         {

@@ -8,7 +8,6 @@ namespace DomainLayer.ViewModels
         public TaskType Type { get; set; }
         public Status Status { get; set; }
         public string Description { get; set; }
-        public DateTime Assigned_On { get; set; }
         public DateTime Expected_Completion { get; set; }
     }
 }

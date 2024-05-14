@@ -1,7 +1,9 @@
 using AutoMapper;
 using DataAccessLayer.Data;
-using DataAccessLayer.Repository.Clients;
+using DataAccessLayer.Repository.AssignMember;
 using DataAccessLayer.Repository.DailyLogs;
+using DataAccessLayer.Repository.General;
+using DataAccessLayer.Repository.Task;
 using DataAccessLayer.Repository.UnitOfWork;
 using DomainLayer.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,8 +11,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManagementSystem.Services.Authentication;
+using TaskManagementSystem.Services.Clients;
 using TaskManagementSystem.Services.DailyLogs;
 using TaskManagementSystem.Services.GeneralService;
+using TaskManagementSystem.Services.MemberAssign;
+using TaskManagementSystem.Services.Projects;
+using TaskManagementSystem.Services.Tasks;
 
 namespace TaskManagementSystem
 {
@@ -55,8 +61,14 @@ namespace TaskManagementSystem
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IRepo, Repo>();
             builder.Services.AddScoped<IService,Service>();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddScoped<IMemberAssignRepo, MemberAssignRepo>();
+            builder.Services.AddScoped<IMemberAssignService, MemberAssignService>();    
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<ITaskRepo,TaskRepo>();
+            builder.Services.AddScoped<ITaskService,TaskService>();
+            builder.Services.AddScoped<IClientService, ClientService>();
 
 
             var app = builder.Build();

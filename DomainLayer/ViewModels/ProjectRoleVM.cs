@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Model
+namespace DomainLayer.ViewModels
 {
-
-
-    public class Designation : BaseClass
+    public class ProjectRoleVM
     {
         public string Name { get; set; }
         public string Description { get; set; }
     }
-
 }

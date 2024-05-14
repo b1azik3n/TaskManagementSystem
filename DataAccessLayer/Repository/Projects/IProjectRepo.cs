@@ -5,15 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Model;
+using DataAccessLayer.Repository.General;
 
 namespace DataAccessLayer.Repository.Projects
 {
-    public interface IProjectRepo
+    public interface IProjectRepo:IRepo
     {
-        void AddNewProject(Project project);
-        void RemoveProject(Project project);
-        List<ProjectVM> GetAllProjects();
-        Project GetProjectByName(string name);
-        void UpdateProject (Project project);
+        void AddNew(Project project, Guid id);
+        //void Remove(Project project);
+        List<ProjectDisplayVM> GetAllProjects();
+        ProjectDisplayVM GetProjectByIdViewModel(Guid Id);
+        Project GetProjectByIdMainModel(Guid Id);
+
+            void UpdateProject (Project project);
     }
 }

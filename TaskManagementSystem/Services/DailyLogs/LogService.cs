@@ -2,23 +2,24 @@
 using DataAccessLayer.Repository.UnitOfWork;
 using DomainLayer.Model;
 using DomainLayer.ViewModels;
+using TaskManagementSystem.Services.GeneralService;
 
 namespace TaskManagementSystem.Services.DailyLogs
 {
-    public class LogService : ILogService
+    public class LogService : Service, ILogService
     {
-        private readonly IUnitOfWork unit;
         private readonly IMapper mapper;
+        private readonly IUnitOfWork unit;
 
-        public LogService(IUnitOfWork unit, IMapper mapper)
+        public LogService(IMapper mapper, IUnitOfWork unit) : base(mapper, unit)
         {
-            this.unit = unit;
             this.mapper = mapper;
+            this.unit = unit;
         }
 
-        public void SubmitLog(DailyLogVM vm, string stringID)
+        public void AddNew<Tmodel, TViewModel>(TViewModel viewModel, string stringID) where Tmodel : BaseClass
         {
-            var log = mapper.Map<DailyLog>(vm);
+            var log = mapper.Map<DailyLog>(viewModel);
             log.UserId = Guid.Parse(stringID);
             unit.LogRepo.AddLog(log);
             unit.SaveChanges();

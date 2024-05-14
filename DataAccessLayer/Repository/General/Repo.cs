@@ -2,7 +2,7 @@
 using DataAccessLayer.Data;
 using DomainLayer.Model;
 
-namespace DataAccessLayer.Repository.Clients
+namespace DataAccessLayer.Repository.General
 {
     public class Repo : IRepo
     {
@@ -20,16 +20,16 @@ namespace DataAccessLayer.Repository.Clients
             context.Set<TModel>().Add(tmodel);
         }
 
-        public List<T> GetAll<T>() where T : class 
+        public List<TViewModel> GetAll<T,TViewModel>() where T : class
         {
             var query = context.Set<T>();
-            var map = mapper.ProjectTo<T>(query);
-            return map.ToList();
+            var nextquery = mapper.ProjectTo<TViewModel>(query);
+            return nextquery.ToList();
         }
 
-        public Tmodel GetByID<Tmodel>(Guid id) where Tmodel:BaseClass
+        public Tmodel GetByID<Tmodel>(Guid id) where Tmodel : BaseClass
         {
-            var project = context.Set<Tmodel>().FirstOrDefault(x => x.Id ==id); //solve this name and ID later   
+            var project = context.Set<Tmodel>().FirstOrDefault(x => x.Id == id); //solve this name and ID later   
             if (project == null)
             {
                 return null;
@@ -37,12 +37,20 @@ namespace DataAccessLayer.Repository.Clients
             return project;
         }
 
-        public void Remove<Tmodel>(Tmodel project) where Tmodel : class
+        public bool Remove<Tmodel>(Guid Id) where Tmodel : BaseClass
         {
-            context.Set<Tmodel>().Remove(project);
+            
+            var del = context.Set<Tmodel>().FirstOrDefault(x => x.Id == Id);
+            if (del==null)
+            {
+                return false;
+               
+            }
+            context.Set<Tmodel>().Remove(del);
+            return true;
         }
 
-        public void Update<Tmodel>(Tmodel project) where Tmodel: class
+        public void Update<Tmodel>(Tmodel project) where Tmodel : class
         {
             context.Set<Tmodel>().Update(project);
         }

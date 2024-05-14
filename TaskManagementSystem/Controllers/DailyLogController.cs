@@ -1,4 +1,5 @@
-﻿using DomainLayer.ViewModels;
+﻿using DomainLayer.Model;
+using DomainLayer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -6,7 +7,7 @@ using TaskManagementSystem.Services.DailyLogs;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Route("api/[controller]/[Action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class DailyLogController : ControllerBase
     {
@@ -23,29 +24,38 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         public IActionResult SubmitLog([FromBody] DailyLogVM log)
         {
-            var Id = GetUserIDFromToken();
-            logService.SubmitLog(log,Id);
+            string Id = GetUserIDFromToken();
+            logService.AddNew<DailyLog,DailyLogVM>(log,Id);
 
-            return Ok(new { message = "Submitted Succesfully",Id });
+            return Ok(new { message = "Submitted Succesfully" });
 
 
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult ViewSpecific([FromBody] string name)
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult ViewSpecific(Guid Id)
         {
-            var loginfo = logService.ViewLog(name);
+            var loginfo = logService.GetByID<DailyLog, DailyLogVM>(Id);
             return Ok(loginfo);
         }
         [HttpGet]
         public IActionResult ViewAllLog()
         {
-            var list=logService.GetAllLogs();
+            var list=logService.GetAll<DailyLog,DailyLogVM>();
             return Ok(list);
 
         }
-        [HttpDelete] //make it better later
-        public IActionResult DeleteLog([FromBody] DailyLogVM log) {  logService.DeleteLog(log); return Ok(); }
+        [HttpDelete] 
+        public IActionResult DeleteLog(Guid Id)
+        { 
+            if( logService.Remove<DailyLog, DailyLogVM>(Id))
+            {
+                return Ok("Deleted");
+
+            }; 
+           return NotFound();
+        }
 
         protected string GetUserIDFromToken()
         {

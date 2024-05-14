@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Repository.Clients
+namespace DataAccessLayer.Repository.General
 {
     public interface IRepo
     {
         void Add<Tmodel>(Tmodel tmodel) where Tmodel : class;
-        void Remove<Tmodel>(Tmodel project) where Tmodel : class;
-        List<T> GetAll<T>() where T : class;
+        bool Remove<Tmodel>(Guid Id) where Tmodel : BaseClass;
+        List<TViewModel> GetAll<T,TViewModel>() where T : class;
         Tmodel GetByID<Tmodel>(Guid name) where Tmodel : BaseClass;
-        void Update<Tmodel>(Tmodel project) where Tmodel: class;
+        void Update<Tmodel>(Tmodel project) where Tmodel : class;
     }
 }

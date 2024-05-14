@@ -12,12 +12,13 @@ namespace DataAccessLayer.Data
         }
         public DbSet<Project> Projects { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ProjectMember> ProjectMembers { get; set; }
+        public DbSet<ProjectAssign> ProjectMembers { get; set; }
 
         public  DbSet<DailyLog> DailyLogs { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Designation> Designations { get; set; }
+        public DbSet<ProjectRole> ProjectRoles { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<TaskAssign> TaskProjects { get; set; }
         
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

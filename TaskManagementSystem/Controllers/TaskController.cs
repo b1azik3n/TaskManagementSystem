@@ -1,32 +1,34 @@
 ﻿using DomainLayer.Model;
 using DomainLayer.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TaskManagementSystem.Services.GeneralService;
+using TaskManagementSystem.Services.Tasks;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly IService service;
+        private readonly ITaskService service;
 
-        public TaskController(IService service)
+        public TaskController(ITaskService service)
         {
             this.service = service;
         }
+
         [HttpPost]
-        public IActionResult CreateTask([FromBody] TaskVM task)
+        [Route("{ProjectId}")]
+        public IActionResult CreateTask([FromBody] TaskVM task,Guid ProjectId)
         {
-            service.AddNew<TaskModel, TaskVM>(task);
+            service.CreateTask(task,ProjectId);
             return Ok("added");
 
         }
         [HttpGet]
+
         public IActionResult GetAllTasks()
         {
-            var list = service.GetAll<TaskModel>();
+            var list = service.GetAll<TaskModel,TaskVM>();
             return Ok(list);
         }
         [HttpGet]
@@ -36,7 +38,7 @@ namespace TaskManagementSystem.Controllers
             var task = service.GetByID<TaskModel, TaskVM>(id);
             return Ok(task);
         }
-        [HttpPost]
+        [HttpPut]
         [Route("{id}")]
 
 
@@ -48,10 +50,18 @@ namespace TaskManagementSystem.Controllers
 
         }
         [HttpDelete]
-            public IActionResult DeleteProject([FromBody] TaskVM task)
+        [Route("{id}")]
+            public IActionResult DeleteTask(Guid Id)
             {
-                service.Remove<TaskModel,TaskVM>(task);
-                return Ok();
+               if( service.Remove<TaskModel,TaskVM>(Id))
+               {
+                return Ok("Deleted");
+
+
+               };
+                return NotFound();
             }
-        }
+       
+    }
+    
 }

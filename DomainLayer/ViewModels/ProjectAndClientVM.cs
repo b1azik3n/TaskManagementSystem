@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModels
 {
-    public class DesignationVM
+    public class ProjectAndClientVM
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+
+        public Guid ProjectId { get; set; }
+        public Guid ClientId { get; set; }
     }
 }

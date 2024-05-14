@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TaskManagementSystem.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    [Migration("20240510123120_model changes again")]
-    partial class modelchangesagain
+    [Migration("20240514032133_freshstart")]
+    partial class freshstart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.DailyLog", b =>
@@ -84,25 +84,6 @@ namespace TaskManagementSystem.Migrations
                     b.ToTable("DailyLogs");
                 });
 
-            modelBuilder.Entity("DomainLayer.Model.Designation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Designation");
-                });
-
             modelBuilder.Entity("DomainLayer.Model.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -121,7 +102,8 @@ namespace TaskManagementSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -142,10 +124,10 @@ namespace TaskManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DesignationId")
+                    b.Property<Guid>("Assigned_ProjectId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProjectId")
+                    b.Property<Guid>("ProjectRoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
@@ -153,13 +135,89 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DesignationId");
+                    b.HasIndex("Assigned_ProjectId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectRoleId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("ProjectMembers");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.ProjectRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectRoles");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.TaskModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Expected_Completion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.TaskProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Assigned_On")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProjectMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TaskId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectMemberId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("TaskProjects");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.User", b =>
@@ -216,15 +274,17 @@ namespace TaskManagementSystem.Migrations
 
             modelBuilder.Entity("DomainLayer.Model.ProjectMember", b =>
                 {
-                    b.HasOne("DomainLayer.Model.Designation", "Designation")
-                        .WithMany()
-                        .HasForeignKey("DesignationId")
+                    b.HasOne("DomainLayer.Model.Project", "Project")
+                        .WithMany("ProjectMember")
+                        .HasForeignKey("Assigned_ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Model.Project", null)
-                        .WithMany("ProjectMember")
-                        .HasForeignKey("ProjectId");
+                    b.HasOne("DomainLayer.Model.ProjectRole", "ProjectRole")
+                        .WithMany()
+                        .HasForeignKey("ProjectRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DomainLayer.Model.User", "User")
                         .WithMany()
@@ -232,9 +292,37 @@ namespace TaskManagementSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Designation");
+                    b.Navigation("Project");
+
+                    b.Navigation("ProjectRole");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.TaskModel", b =>
+                {
+                    b.HasOne("DomainLayer.Model.Project", null)
+                        .WithMany("Task")
+                        .HasForeignKey("ProjectId");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.TaskProject", b =>
+                {
+                    b.HasOne("DomainLayer.Model.ProjectMember", "ProjectMember")
+                        .WithMany()
+                        .HasForeignKey("ProjectMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Model.TaskModel", "task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProjectMember");
+
+                    b.Navigation("task");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.Client", b =>
@@ -245,6 +333,8 @@ namespace TaskManagementSystem.Migrations
             modelBuilder.Entity("DomainLayer.Model.Project", b =>
                 {
                     b.Navigation("ProjectMember");
+
+                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.User", b =>

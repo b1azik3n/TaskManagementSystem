@@ -1,12 +1,12 @@
-﻿using DomainLayer.ViewModels;
-using Microsoft.AspNetCore.Http;
+﻿using DomainLayer.Model;
+using DomainLayer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
+using TaskManagementSystem.Services.GeneralService;
 using TaskManagementSystem.Services.Projects;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Route("api/[controller]/[Action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -18,37 +18,45 @@ namespace TaskManagementSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProject([FromBody] ProjectVM project)
+        [Route("{ClientId}")]
+        public IActionResult AddProject([FromBody] ProjectAddVM project,Guid ClientId)
         {
-            service.AddNewProject(project);
+            service.AddNew(project,ClientId);
             return Ok("Added");
-            
+
         }
         [HttpGet]
         public IActionResult GetAllProjects()
         {
-          var list= service.GetAllProjects();
+            var list = service.GetAll<Project,ProjectAddVM>();
             return Ok(list);
         }
         [HttpGet]
-        public IActionResult Get_A_Project(string Name) {
-            var project=service.GetProjectByName(Name);
-            return Ok("project");
+        [Route("{id}")]
+        public IActionResult Get_A_Project(Guid Id) {
+            var project = service.GetProjectById(Id);
+            return Ok(project);
         }
-        [HttpPost]
-        public IActionResult EditProject([FromBody] ProjectVM project)
+        [HttpPut]
+        public IActionResult UpdateProject([FromBody] ProjectAddVM project, Guid Id)
         {
-            service.EditProject(project);
-            var updated=service.GetProjectByName(project.Name);
-            return Ok(new {message="Updated",updated});
-           
+            service.Edit<Project, ProjectAddVM>(project, Id);
+            var updated = service.GetByID<Project,ProjectAddVM>(Id);
+            return Ok(new { message = "Updated", updated });
+
         }
         [HttpDelete]
-        public IActionResult DeleteProject([FromBody] ProjectVM project)
+        public IActionResult DeleteProject(Guid id)
         {
-            service.RemoveProject(project); 
-            return Ok();
+            
+            if(service.Remove <Project, ProjectAddVM>(id))
+            {
+                return Ok("deleted");
+            };
+            return NotFound();
         }
+       
+        
     }
 
 }

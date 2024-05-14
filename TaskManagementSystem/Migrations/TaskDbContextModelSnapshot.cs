@@ -82,25 +82,6 @@ namespace TaskManagementSystem.Migrations
                     b.ToTable("DailyLogs");
                 });
 
-            modelBuilder.Entity("DomainLayer.Model.Designation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Designations");
-                });
-
             modelBuilder.Entity("DomainLayer.Model.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -119,7 +100,8 @@ namespace TaskManagementSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -140,10 +122,10 @@ namespace TaskManagementSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DesignationId")
+                    b.Property<Guid>("Assigned_ProjectId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProjectId")
+                    b.Property<Guid>("ProjectRoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
@@ -151,13 +133,32 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DesignationId");
+                    b.HasIndex("Assigned_ProjectId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectRoleId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("ProjectMembers");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.ProjectRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectRoles");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.TaskModel", b =>
@@ -165,9 +166,6 @@ namespace TaskManagementSystem.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Assigned_On")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -180,10 +178,7 @@ namespace TaskManagementSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProjectMemberId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
@@ -196,9 +191,31 @@ namespace TaskManagementSystem.Migrations
 
                     b.HasIndex("ProjectId");
 
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("DomainLayer.Model.TaskProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Assigned_On")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProjectMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TaskId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("ProjectMemberId");
 
-                    b.ToTable("Tasks");
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("TaskProjects");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.User", b =>
@@ -255,15 +272,17 @@ namespace TaskManagementSystem.Migrations
 
             modelBuilder.Entity("DomainLayer.Model.ProjectMember", b =>
                 {
-                    b.HasOne("DomainLayer.Model.Designation", "Designation")
-                        .WithMany()
-                        .HasForeignKey("DesignationId")
+                    b.HasOne("DomainLayer.Model.Project", "Project")
+                        .WithMany("ProjectMember")
+                        .HasForeignKey("Assigned_ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Model.Project", null)
-                        .WithMany("ProjectMember")
-                        .HasForeignKey("ProjectId");
+                    b.HasOne("DomainLayer.Model.ProjectRole", "ProjectRole")
+                        .WithMany()
+                        .HasForeignKey("ProjectRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DomainLayer.Model.User", "User")
                         .WithMany()
@@ -271,28 +290,37 @@ namespace TaskManagementSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Designation");
+                    b.Navigation("Project");
+
+                    b.Navigation("ProjectRole");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.TaskModel", b =>
                 {
-                    b.HasOne("DomainLayer.Model.Project", "Project")
+                    b.HasOne("DomainLayer.Model.Project", null)
                         .WithMany("Task")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
+                });
 
+            modelBuilder.Entity("DomainLayer.Model.TaskProject", b =>
+                {
                     b.HasOne("DomainLayer.Model.ProjectMember", "ProjectMember")
                         .WithMany()
                         .HasForeignKey("ProjectMemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Project");
+                    b.HasOne("DomainLayer.Model.TaskModel", "task")
+                        .WithMany()
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProjectMember");
+
+                    b.Navigation("task");
                 });
 
             modelBuilder.Entity("DomainLayer.Model.Client", b =>

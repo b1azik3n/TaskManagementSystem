@@ -1,8 +1,9 @@
-﻿using DomainLayer.Model;
+﻿using DataAccessLayer.Repository.General;
+using DomainLayer.Model;
 
 namespace DataAccessLayer.Repository.DailyLogs
 {
-    public interface ILogRepo
+    public interface ILogRepo:IRepo
     {
         void AddLog(DailyLog log);
         void RemoveLog(DailyLog log);

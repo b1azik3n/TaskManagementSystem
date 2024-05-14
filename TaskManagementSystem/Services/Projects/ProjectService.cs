@@ -3,55 +3,55 @@ using DataAccessLayer.Repository.Projects;
 using DataAccessLayer.Repository.UnitOfWork;
 using DomainLayer.Model;
 using DomainLayer.ViewModels;
+using TaskManagementSystem.Services.GeneralService;
 
 namespace TaskManagementSystem.Services.Projects
 {
-    public class ProjectService : IProjectService
+    public class ProjectService :Service, IProjectService
     {
         private readonly IMapper mapper;
         private readonly IUnitOfWork unit;
 
-        public ProjectService(IMapper mapper, IUnitOfWork unit)
+        public ProjectService(IMapper mapper, IUnitOfWork unit) : base(mapper, unit)
         {
             this.mapper = mapper;
             this.unit = unit;
         }
 
-        public void AddNewProject(ProjectVM projectVM)
+        public void AddNew(ProjectAddVM projectVM, Guid id)
         {
-            var project = Mapper.Map<Project>(projectVM);
-            unit.ProjectRepo.AddNewProject(project);
+            var project = mapper.Map<Project>(projectVM);
+            unit.ProjectRepo.AddNew(project, id);
             unit.SaveChanges();
 
         }
 
-        public void EditProject(ProjectVM projectVM)
+        public void EditProject(ProjectAddVM projectVM, Guid Id)
         {
-            var project = unit.ProjectRepo.GetProjectByName(projectVM.Name);
+            var project = unit.ProjectRepo.GetProjectByIdMainModel(Id);
             mapper.Map(projectVM, project);
             unit.ProjectRepo.UpdateProject(project);
             unit.SaveChanges();
 
         }
 
-        public List<ProjectVM> GetAllProjects()
+        public List<ProjectDisplayVM> GetAllProjects()
         {
             var list = unit.ProjectRepo.GetAllProjects();
             return list;
 
         }
 
-        public ProjectVM GetProjectByName(string name)
+        public ProjectDisplayVM GetProjectById(Guid Id)
         {
-            var project = unit.ProjectRepo.GetProjectByName(name);
-            var vm = mapper.Map<ProjectVM>(project);
+            var project = unit.ProjectRepo.GetProjectByIdMainModel(Id);
+            var vm = mapper.Map<ProjectDisplayVM>(project);
             return vm;
         }
 
-        public void RemoveProject(ProjectVM project)
+        public void RemoveProject(Guid Id)
         {
-            var send = mapper.Map<Project>(project);
-            unit.ProjectRepo.RemoveProject(send);
+            unit.Repo.Remove<Project>(Id);
         }
     }
     
