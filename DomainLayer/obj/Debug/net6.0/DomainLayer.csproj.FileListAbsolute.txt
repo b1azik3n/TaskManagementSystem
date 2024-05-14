@@ -11,3 +11,18 @@ E:\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
 E:\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
 E:\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
 E:\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll
+<<<<<<< HEAD
+=======
+D:\shubu\TaskManagementSystem\DomainLayer\bin\Debug\net6.0\DomainLayer.deps.json
+D:\shubu\TaskManagementSystem\DomainLayer\bin\Debug\net6.0\DomainLayer.dll
+D:\shubu\TaskManagementSystem\DomainLayer\bin\Debug\net6.0\DomainLayer.pdb
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.AssemblyReference.cache
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfoInputs.cache
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfo.cs
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.CoreCompileInputs.cache
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
+D:\shubu\TaskManagementSystem\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll
+>>>>>>> 750eb9f78b0c75ee9e0ae090c413413ef01a6c8d

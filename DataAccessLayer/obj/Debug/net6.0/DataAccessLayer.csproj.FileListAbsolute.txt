@@ -16,3 +16,23 @@ E:\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.
 E:\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
 E:\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
 E:\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+<<<<<<< HEAD
+=======
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DomainLayer.dll
+D:\shubu\TaskManagementSystem\DataAccessLayer\bin\Debug\net6.0\DomainLayer.pdb
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CopyComplete
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.genruntimeconfig.cache
+D:\shubu\TaskManagementSystem\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
+>>>>>>> 750eb9f78b0c75ee9e0ae090c413413ef01a6c8d
